@@ -1,0 +1,23 @@
+{
+  "name": "laolizi",
+  "version": "1.0.0",
+  "description": "This is my first node.js module,just for studying.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dllglishaoyi/node_module_practise.git"
+  },
+  "author": "Laolizi <dllglishaoi@gmail.com> (https://github.com/dllglishaoyi)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dllglishaoyi/node_module_practise/issues"
+  },
+  "homepage": "https://github.com/dllglishaoyi/node_module_practise#readme",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3"
+  }
+}
