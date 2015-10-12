@@ -56,7 +56,7 @@ var sign = function(obj){
     }).sort().map(function(key){
         return key + '=' + obj[key];
     }).join('&') + "&key=" + PARTNER_KEY;
-
+    console.log("querystring",querystring);
     obj.sign = md5(querystring).toUpperCase();
 
     return obj;
@@ -75,11 +75,6 @@ var config_example = {
 function Redpack(config) {
     var default_config = {
         nonce_str: getNonceStr(),
-        //东京扫货情报
-        mch_id: "1268774801",
-        wxappid: "wxaf5916d27b3ab987",
-
-        total_num : 1,
         client_ip :getIP(),
     };
     var final_config = default_config;
@@ -94,8 +89,8 @@ function Redpack(config) {
     this._config = final_config || {};
     var that = this;
     this.send = function(callback){
+        var PFX = that._config.pfx;
         var opts = sign(that._config);
-        var PFX = opts.pfx;
         var builder = new xml2js.Builder();
         var xml = builder.buildObject({ xml:opts });
         console.log(xml);
@@ -109,11 +104,16 @@ function Redpack(config) {
             }
         }, 
             function(err, response, body){
-                console.log("err",err);
-                console.log("response",response);
-                console.log("body",body);
                 if (callback) {
-                callback(err,body);
+                    if(body){
+                        var parseString = require('xml2js').parseString;
+                        parseString(body, function (error, result) {
+                            callback(err,body);
+                        });
+                    }else{
+                        callback(err,body);
+                    }
+                    
                 };
         });
     };
